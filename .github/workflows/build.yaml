@@ -28,3 +28,6 @@ jobs:
           platforms: linux/amd64
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+      - name: Deploy to Coolify
+        run: |
+          curl --request GET 'https://coolify.serveo.net/api/v1/deploy?uuid=k00cssc&force=false' --header 'Authentication: Bearer ${{ secrets.COOLIFY_TOKEN }}'
