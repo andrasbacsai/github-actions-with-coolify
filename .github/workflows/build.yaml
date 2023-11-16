@@ -1,3 +1,4 @@
+# For more details, read this: https://coolify.io/docs/github-actions
 name: Build Static Image
 on:
   push:
@@ -29,6 +30,5 @@ jobs:
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
       - name: Deploy to Coolify
-        run: |
-          : # coolify.serveo.net is my Coolify instance running localhost
-          curl --request GET 'https://coolify.serveo.net/api/v1/deploy?uuid=k00cssc&force=false' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
+        run: | 
+         curl --request GET '${{ secrets.COOLIFY_WEBHOOK }}' --header 'Authorization: Bearer ${{ secrets.COOLIFY_TOKEN }}'
